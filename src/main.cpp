@@ -1,5 +1,5 @@
 #include <iostream>
-#include "array.h"
+#include "DynamicArray.h"
 
 int main() {
     std::cout << "=== 1. Создание и базовое заполнение массива ===" << std::endl;

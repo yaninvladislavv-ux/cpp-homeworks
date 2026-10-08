@@ -1,5 +1,5 @@
 #include <iostream>
-#include "array.h"
+#include "DynamicArray.h"
 
 
 Array::Array(int size){
