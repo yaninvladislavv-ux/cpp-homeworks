@@ -1,6 +1,6 @@
 #include <iostream>
-#include "array.h"
-
+#include "DynamicArray.h"
+#include <stdexcept>
 
 Array::Array(int size){
     this->size = size;
@@ -21,20 +21,17 @@ void Array::PrintArray(){
 
 void Array::setArray(int index, int value){
     if(index<0 || index >=size){
-        std::cerr << "Выход за границы массива";
-        return;
+        throw std::out_of_range("Выход за границы массива");
     }
     if(value < -100 || value > 100){
-        std::cerr << "Выход за диапазон";
-        return;
+        throw std::invalid_argument("Выход за диапазон");
     }
     data[index] = value;
 }
 
 int Array::getArray(int index){
     if(index < 0 || index >= size){
-        std::cerr << "Выход за границы массива";
-        return 0;
+        throw std::out_of_range("Выход за границы массива");
     }
     return data[index];
 }
@@ -50,7 +47,7 @@ Array::Array(const Array& other){
 //функция добавления значения в конец массива
 void Array::AddEndArray(int n){
     if(n < -100 || n > 100){
-        std::cerr << "Выход за диапазон";
+        throw std::invalid_argument("Выход за диапазон");
     }
     else{
         int* NewData = new int[size + 1];
@@ -66,17 +63,19 @@ void Array::AddEndArray(int n){
 
 //сложение и вычитание
 void Array::addArray(const Array& other){
+    if(size != other.size){
+        throw std::out_of_range("Размеры массивов не совпадают");
+    }
     for(int i = 0; i < size; i++){
-        if(i < other.size){
             data[i] = data[i] + other.data[i];
-        }
     }
 }
 
 void Array::subArray(const Array& other){
+    if(size != other.size){
+        throw std::out_of_range("Размеры массивов не совпадают");
+    }
     for(int i = 0; i < size; i++){
-        if(i < other.size){
             data[i] = data[i] - other.data[i];
-        }
     }
 }
